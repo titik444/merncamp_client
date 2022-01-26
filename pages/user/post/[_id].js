@@ -1,33 +1,31 @@
-import { useContext, useState, useEffect } from "react";
-import { UserContext } from "../../context";
-import UserRouter from "../../components/routes/UserRoute";
-import PostForm from "../../components/forms/PostForm";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import PostForm from "../../../components/forms/PostForm";
+import UserRouter from "../../../components/routes/UserRoute";
 import { toast } from "react-toastify";
-import PostList from "../../components/cards/PostList";
 
-const Home = () => {
-  const [state, setState] = useContext(UserContext);
+const EditPost = () => {
+  const [post, setPost] = useState({});
   // state
   const [content, setContent] = useState("");
   const [image, setImage] = useState({});
   const [uploading, setUploading] = useState(false);
-  // posts
-  const [posts, setPosts] = useState([]);
 
-  // route
   const router = useRouter();
+  // console.log("router", router);
+  const _id = router.query._id;
 
   useEffect(() => {
-    if (state && state.token) fetchUserPosts();
-  }, [state && state.token]);
+    if (_id) fetchPost();
+  }, [_id]);
 
-  const fetchUserPosts = async () => {
+  const fetchPost = async () => {
     try {
-      const { data } = await axios.get("/user-posts");
-      console.log("user posts => ", data);
-      setPosts(data);
+      const { data } = await axios.get(`/user-post/${_id}`);
+      setPost(data);
+      setContent(data.content);
+      setImage(data.image);
     } catch (err) {
       console.log(err);
     }
@@ -35,17 +33,16 @@ const Home = () => {
 
   const postSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const { data } = await axios.post("/create-post", { content, image });
-      console.log("create post response", data);
+      const { data } = await axios.put(`/update-post/${_id}`, {
+        content,
+        image,
+      });
       if (data.error) {
         toast.error(data.error);
       } else {
-        fetchUserPosts();
         toast.success("Post created");
-        setContent("");
-        setImage({});
+        router.push("/user/dashboard");
       }
     } catch (err) {
       console.log(err);
@@ -81,7 +78,7 @@ const Home = () => {
           </div>
         </div>
         <div className="row py-3">
-          <div className="col-md-8">
+          <div className="col-md-8 offset-md-2">
             <PostForm
               content={content}
               setContent={setContent}
@@ -90,15 +87,11 @@ const Home = () => {
               uploading={uploading}
               image={image}
             />
-            <br />
-            <PostList posts={posts} />
           </div>
-
-          <div className="col-md-4">Sidebar</div>
         </div>
       </div>
     </UserRouter>
   );
 };
 
-export default Home;
+export default EditPost;
