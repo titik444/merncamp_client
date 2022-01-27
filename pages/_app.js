@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="stylesheet" href="/css/styles.css" />
       </Head>
       <Nav />
-      <ToastContainer position="top-center" />
+      <ToastContainer position="top-center" autoClose={3000} />
       <Component {...pageProps} />
     </UserProvider>
   );

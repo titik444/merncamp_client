@@ -41,7 +41,7 @@ const EditPost = () => {
       if (data.error) {
         toast.error(data.error);
       } else {
-        toast.success("Post created");
+        toast.success("Post updated");
         router.push("/user/dashboard");
       }
     } catch (err) {
