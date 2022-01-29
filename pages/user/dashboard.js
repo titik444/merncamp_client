@@ -122,6 +122,28 @@ const Home = () => {
     }
   };
 
+  const handleLike = async (_id) => {
+    // console.log("like this post => ", _id);
+    try {
+      const { data } = await axios.put("/like-post", { _id });
+      // console.log("liked", data);
+      newsFeed();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleUnlike = async (_id) => {
+    // console.log("unlike this post => ", _id);
+    try {
+      const { data } = await axios.put("/unlike-post", { _id });
+      // console.log("unliked", data);
+      newsFeed();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <UserRouter>
       <div className="container-fluid">
@@ -141,7 +163,13 @@ const Home = () => {
               image={image}
             />
             <br />
-            <PostList posts={posts} handleDelete={handleDelete} />
+            <PostList
+              post={posts}
+              posts={posts}
+              handleDelete={handleDelete}
+              handleLike={handleLike}
+              handleUnlike={handleUnlike}
+            />
           </div>
 
           <div className="col-md-4">
