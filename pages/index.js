@@ -11,7 +11,17 @@ const Home = ({ posts }) => {
 };
 
 export async function getServerSideProps() {
-  const { data } = await axios.get("/posts");
+  // const { data } = await axios.get("/posts");
+
+  fetch(`/posts`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err));
+
   // console.log(data);
   return {
     props: {}, // will be passed to the page component as props
