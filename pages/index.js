@@ -13,7 +13,7 @@ const Home = ({ posts }) => {
 export async function getServerSideProps() {
   // const { data } = await axios.get("/posts");
 
-  const { data } = await fetch(`/posts`, {
+  const data = await fetch(`/posts`, {
     method: "GET",
   });
 
