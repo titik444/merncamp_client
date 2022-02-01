@@ -10,7 +10,9 @@ const Home = ({ posts }) => {
   return <>test</>;
 };
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
+  const { data } = await axios.get("/posts");
+  // console.log(data);
   return {
     props: {}, // will be passed to the page component as props
   };
