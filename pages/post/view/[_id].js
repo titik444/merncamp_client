@@ -47,7 +47,9 @@ const SinglePost = ({ post }) => {
 };
 
 export async function getServerSideProps(ctx) {
-  const { data } = await axios.get(`/post/${ctx.params._id}`);
+  const { data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_API}/post/${ctx.params._id}`
+  );
   // console.log(data);
   return {
     props: {
