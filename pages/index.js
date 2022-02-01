@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { UserContext } from "../context";
 import ParallaxBG from "../components/cards/ParallaxBG";
 import axios from "axios";
-import PostPublic from "../components/cards/PostPublic";
+// import PostPublic from "../components/cards/PostPublic";
 import Head from "next/head";
 import Link from "next/link";
 
@@ -52,7 +52,7 @@ const Home = ({ posts }) => {
 
 export async function getServerSideProps() {
   const { data } = await axios.get("/posts");
-  // console.log(data);
+  console.log(data);
   return {
     props: {
       posts: data,
