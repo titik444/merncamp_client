@@ -10,4 +10,14 @@ const Home = ({ posts }) => {
   return <>test</>;
 };
 
+export async function getServerSideProps() {
+  const { data } = await axios.get("/posts");
+  console.log(data);
+  return {
+    props: {
+      posts: data,
+    },
+  };
+}
+
 export default Home;
