@@ -53,9 +53,7 @@ const Home = ({ posts }) => {
 };
 
 export async function getServerSideProps() {
-  const { data } = await axios.get(
-    "https://75a1-2001-448a-20a0-5fce-147-184b-dc5e-2655.ap.ngrok.io/api/posts"
-  );
+  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/posts`);
   // console.log(data);
   return {
     props: {
