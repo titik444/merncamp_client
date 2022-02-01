@@ -40,9 +40,7 @@ const Home = ({ posts }) => {
           {posts.map((post) => (
             <div className="col-md-4">
               <Link href={`/post/view/${post._id}`}>
-                <a>
-                  <PostPublic key={post._id} post={post} />
-                </a>
+                <a>{/* <PostPublic key={post._id} post={post} /> */}</a>
               </Link>
             </div>
           ))}
