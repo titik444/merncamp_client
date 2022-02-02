@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import PostForm from "../../../components/forms/PostForm";
-import UserRouter from "../../../components/routes/UserRoute";
+import UserRoute from "../../../components/routes/UserRoute";
 import { toast } from "react-toastify";
 
 const EditPost = () => {
@@ -70,7 +70,7 @@ const EditPost = () => {
   };
 
   return (
-    <UserRouter>
+    <UserRoute>
       <div className="container-fluid">
         <div className="row py-5 text-light bg-default-image">
           <div className="col text-center">
@@ -90,7 +90,7 @@ const EditPost = () => {
           </div>
         </div>
       </div>
-    </UserRouter>
+    </UserRoute>
   );
 };
 

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { SyncOutlined } from "@ant-design/icons";
 import { UserContext } from "../../context";
 
-const UserRouter = ({ children }) => {
+const UserRoute = ({ children }) => {
   const [ok, setOk] = useState(false);
   const router = useRouter();
   const [state] = useContext(UserContext);
@@ -38,4 +38,4 @@ const UserRouter = ({ children }) => {
   );
 };
 
-export default UserRouter;
+export default UserRoute;
